@@ -99,10 +99,6 @@ python.pkgs.buildPythonApplication rec {
     substituteInPlace frigate/events/audio.py \
       --replace-fail "/cpu_audio_model.tflite" "${placeholder "out"}/share/frigate/cpu_audio_model.tflite" \
       --replace-fail "/audio-labelmap.txt" "${placeholder "out"}/share/frigate/audio-labelmap.txt"
-
-    # work around onvif-zeep idiosyncrasy
-    substituteInPlace frigate/ptz/onvif.py \
-      --replace-fail dist-packages site-packages
   '';
 
   dontBuild = true;
