@@ -9,14 +9,41 @@ index c5986d45..b767e19e 100644
 -from frigate.const import CONFIG_DIR
 +from frigate.const import BASE_DIR, CONFIG_DIR
  from frigate.models import User
-
+ 
  logger = logging.getLogger(__name__)
 @@ -333,7 +333,7 @@ class WebPushClient(Communicator):  # type: ignore[misc]
-
+ 
          title = f"{titlecase(', '.join(sorted_objects).replace('_', ' '))}{' was' if state == 'end' else ''} detected in {titlecase(', '.join(payload['after']['data']['zones']).replace('_', ' '))}"
          message = f"Detected on {titlecase(camera.replace('_', ' '))}"
 -        image = f"{payload['after']['thumb_path'].replace('/media/frigate', '')}"
 +        image = f"{payload['after']['thumb_path'].replace(BASE_DIR, '')}"
-
+ 
          # if event is ongoing open to live view otherwise open to recordings view
          direct_url = f"/review?id={reviewId}" if state == "end" else f"/#{camera}"
+diff --git a/frigate/config/camera/ffmpeg.py b/frigate/config/camera/ffmpeg.py
+index 04bbfac7..5d6d8ea2 100644
+--- a/frigate/config/camera/ffmpeg.py
++++ b/frigate/config/camera/ffmpeg.py
+@@ -70,18 +70,18 @@ class FfmpegConfig(FrigateBaseModel):
+     @property
+     def ffmpeg_path(self) -> str:
+         if self.path == "default":
+-            return f"/usr/lib/ffmpeg/{DEFAULT_FFMPEG_VERSION}/bin/ffmpeg"
++            return "ffmpeg" # Use ffmpeg from PATH in NixOS
+         elif self.path in INCLUDED_FFMPEG_VERSIONS:
+-            return f"/usr/lib/ffmpeg/{self.path}/bin/ffmpeg"
++            return "ffmpeg" # Use ffmpeg from PATH in NixOS
+         else:
+             return f"{self.path}/bin/ffmpeg"
+ 
+     @property
+     def ffprobe_path(self) -> str:
+         if self.path == "default":
+-            return f"/usr/lib/ffmpeg/{DEFAULT_FFMPEG_VERSION}/bin/ffprobe"
++            return "ffprobe" # Use ffprobe from PATH in NixOS
+         elif self.path in INCLUDED_FFMPEG_VERSIONS:
+-            return f"/usr/lib/ffmpeg/{self.path}/bin/ffprobe"
++            return "ffprobe" # Use ffprobe from PATH in NixOS
+         else:
+             return f"{self.path}/bin/ffprobe"
+ 
