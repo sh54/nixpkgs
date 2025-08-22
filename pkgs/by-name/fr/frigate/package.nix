@@ -128,6 +128,7 @@ python.pkgs.buildPythonApplication rec {
     pathvalidate
     peewee
     peewee-migrate
+    prometheus-client
     psutil
     py3nvml
     pydantic
