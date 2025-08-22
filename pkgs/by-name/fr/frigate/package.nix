@@ -134,6 +134,7 @@ python.pkgs.buildPythonApplication rec {
     py3nvml
     pyclipper
     pydantic
+    python-multipart
     pytz
     py-vapid
     pywebpush
