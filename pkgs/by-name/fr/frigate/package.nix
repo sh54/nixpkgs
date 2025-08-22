@@ -142,6 +142,7 @@ python.pkgs.buildPythonApplication rec {
     ruamel-yaml
     scipy
     setproctitle
+    shapely
     slowapi
     starlette
     starlette-context
