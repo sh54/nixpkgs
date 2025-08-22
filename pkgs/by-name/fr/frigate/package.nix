@@ -87,13 +87,6 @@ python.pkgs.buildPythonApplication rec {
       --replace-fail "/usr/local/lib/vec0" "${lib.getLib sqlite-vec}/lib/vec0${stdenv.hostPlatform.extensions.sharedLibrary}"
 
   ''
-  # clang-rocm, provided by `rocmPackages.clr`, only works on x86_64-linux specifically
-  + lib.optionalString (with stdenv.hostPlatform; isx86_64 && isLinux) ''
-    substituteInPlace frigate/detectors/plugins/rocm.py \
-      --replace-fail "/opt/rocm/bin/rocminfo" "rocminfo" \
-      --replace-fail "/opt/rocm/lib" "${rocmPackages.clr}/lib"
-
-  ''
   + ''
     # provide default paths for models and maps that are shipped with frigate
     substituteInPlace frigate/config/config.py \
