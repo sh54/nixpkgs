@@ -132,6 +132,7 @@ python.pkgs.buildPythonApplication rec {
     prometheus-client
     psutil
     py3nvml
+    pyclipper
     pydantic
     pytz
     py-vapid
