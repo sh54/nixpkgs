@@ -107,6 +107,7 @@ python.pkgs.buildPythonApplication rec {
     # docker/main/requirements.txt
     scikit-build
     # docker/main/requirements-wheel.txt
+    aiofiles
     aiohttp
     click
     fastapi
