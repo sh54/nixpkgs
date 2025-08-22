@@ -114,6 +114,7 @@ python.pkgs.buildPythonApplication rec {
     google-generativeai
     imutils
     joserfc
+    levenshtein
     markupsafe
     norfair
     numpy
