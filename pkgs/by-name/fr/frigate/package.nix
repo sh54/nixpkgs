@@ -148,6 +148,7 @@ python.pkgs.buildPythonApplication rec {
     starlette
     starlette-context
     tensorflow-bin
+    titlecase
     transformers
     tzlocal
     unidecode
